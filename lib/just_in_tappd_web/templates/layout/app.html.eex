@@ -8,15 +8,26 @@
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
   </head>
   <body>
-    <nav>
-      <div class="nav-wrapper">
-        <a href="#" class="brand-logo right">JustInTappd</a>
-        <ul id="nav-mobile" class="left hide-on-med-and-down">
-          <li><a href="beer.html">Beer</a></li>
-          <li><a href="orders.html">Orders</a></li>
-          <li><a href="sales.html">Sales</a></li>
-        </ul>
-      </div>
+    <nav class="blue">
+      <a href="#" class="brand-logo left">JustInTappd</a>
+
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li>
+          <a href="beer.html">
+            <%= gettext "Beer" %>
+          </a>
+        </li>
+        <li>
+          <a href="orders.html">
+            <%= gettext "Orders" %>
+          </a>
+        </li>
+        <li>
+          <a href="sales.html">
+            <%= gettext "Sales" %>
+          </a>
+        </li>
+      </ul>
     </nav>
     <main role="main" class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
