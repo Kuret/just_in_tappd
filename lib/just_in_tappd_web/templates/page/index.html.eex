@@ -1,35 +1,27 @@
-<section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
-  <p>A productive web framework that<br/>does not compromise speed and maintainability.</p>
-</section>
+<div class="section">
+  <div class="section">
+    <div class="row">
+      <div class="col s6 offset-s3"><h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1></div>
+    </div>
+    <div class="row">
+      <div class="col 6 offset-s3"><p>A productive web framework that<br/>does not compromise speed and maintainability.</p></div>
+    </div>
+  </div>
 
-<section class="row">
-  <article class="column">
-    <h2>Resources</h2>
-    <ul>
-      <li>
-        <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix/blob/v1.4/CHANGELOG.md">v1.4 Changelog</a>
-      </li>
-    </ul>
-  </article>
-  <article class="column">
-    <h2>Help</h2>
-    <ul>
-      <li>
-        <a href="https://elixirforum.com/c/phoenix-forum">Forum</a>
-      </li>
-      <li>
-        <a href="https://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on Freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a>
-      </li>
-    </ul>
-  </article>
-</section>
+  <div class="section">
+    <div class="row">
+      <div class="col s6">
+        <h2>Resources</h2>
+        <div class="row"><a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a></div>
+        <div class="row"><a href="https://github.com/phoenixframework/phoenix">Source</a></div>
+        <div class="row"><a href="https://github.com/phoenixframework/phoenix/blob/v1.4/CHANGELOG.md">v1.4 Changelog</a></div>
+      </div>
+      <div class="col s6">
+        <div class="row"><h2>Help</h2></div>
+        <div class="row"><a href="https://elixirforum.com/c/phoenix-forum">Forum</a></div>
+        <div class="row"><a href="https://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on Freenode IRC</a></div>
+        <div class="row"><a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a></div>
+      </div>
+    </div>
+  </div>
+</div>
