@@ -1,4 +1,4 @@
-<section>
+<section class="section">
   <div class="row">
     <div class="col s6 offset-s3">
       <h1>
@@ -15,7 +15,7 @@
   </div>
 </section>
 
-<section>
+<section class="section">
   <div class="row">
     <p>
       <%= gettext "My First Playground" %>
