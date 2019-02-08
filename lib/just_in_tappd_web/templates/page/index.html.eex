@@ -20,4 +20,5 @@
     <p>
       <%= gettext "My First Playground" %>
     </p>
+  </div>
 </section>

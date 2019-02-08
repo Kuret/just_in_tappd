@@ -17,6 +17,8 @@ defmodule JustInTappdWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/search", SearchController, :index
+    post "/search/:id", SearchController, :create
   end
 
   # Other scopes may use custom stacks.
