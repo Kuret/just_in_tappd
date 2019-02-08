@@ -7,26 +7,30 @@
     <title>JustInTappd · Phoenix Framework</title>
   </head>
   <body>
-    <nav class="blue">
-      <a href="#" class="brand-logo left">JustInTappd</a>
+    <nav class="light-blue">
+      <div class="nav-wrapper container">
 
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li>
-          <a href="beer.html">
-            <%= gettext "Beer" %>
-          </a>
-        </li>
-        <li>
-          <a href="orders.html">
-            <%= gettext "Orders" %>
-          </a>
-        </li>
-        <li>
-          <a href="sales.html">
-            <%= gettext "Sales" %>
-          </a>
-        </li>
-      </ul>
+        <a href="#" class="brand-logo left">JustInTappd</a>
+
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li>
+            <a href="beer.html">
+              <%= gettext "Beer" %>
+            </a>
+          </li>
+          <li>
+            <a href="orders.html">
+              <%= gettext "Orders" %>
+            </a>
+          </li>
+          <li>
+            <a href="sales.html">
+              <%= gettext "Sales" %>
+            </a>
+          </li>
+        </ul>
+
+      </div>
     </nav>
     <main role="main" class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
