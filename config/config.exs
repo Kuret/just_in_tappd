@@ -28,6 +28,12 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+config :ex_tappd,
+  api_user: System.get_env("UT_USER"),
+  rw_api_key: System.get_env("UT_RW_KEY"),
+  ro_api_key: System.get_env("UT_RO_KEY"),
+  base_url: System.get_env("UT_BASE_URL") || "https://business.untappd.com/api/v1"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
