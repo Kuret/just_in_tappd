@@ -6,6 +6,10 @@
     "build": "webpack --mode production",
     "watch": "webpack --mode development --watch"
   },
+  "engines": {
+    "yarn": "^1.12.3",
+    "node": "10.14.2"
+  },
   "dependencies": {
     "materialize-css": "^1.0.0",
     "materialize-loader": "^3.0.1",
