@@ -1,0 +1,32 @@
+{
+  "name": "just-in-tappd",
+  "description": "Product management for beer",
+  "scripts": {
+    "postdeploy": "mix run priv/repo/seeds.exs"
+  },
+  "env": {
+    "MIX_ENV": {
+      "required": true,
+      "value": "prod"
+    },
+    "NODE_ENV": {
+      "required": true
+    },
+    "SECRET_KEY_BASE": {
+      "generator": "secret"
+    },
+    "HEROKU_APP_NAME": {
+      "required": true
+    }
+  },
+  "formation": {},
+  "addons": ["heroku-postgresql", "papertrail", "scout"],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs.git"
+    },
+    {
+      "url": "https://github.com/HashNuke/heroku-buildpack-elixir.git"
+    }
+  ]
+}
