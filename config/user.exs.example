@@ -1,0 +1,7 @@
+use Mix.Config
+
+config :ex_tappd,
+  api_user: "your-api-user@mail.address",
+  rw_api_key: "your-rw-api-key",
+  ro_api_key: "your-ro-api-key",
+  base_url: "https://business.untappd.com/api/v1"

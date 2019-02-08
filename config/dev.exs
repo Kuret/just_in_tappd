@@ -66,6 +66,9 @@ config :phoenix, :stacktrace_depth, 20
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
 
+# Configure your local settings
+import_config "user.exs"
+
 # Configure your database
 config :just_in_tappd, JustInTappd.Repo,
   username: "postgres",
