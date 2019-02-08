@@ -14,7 +14,7 @@ defmodule JustInTappdWeb.SearchController do
   end
 
   def create(conn, %{"id" => id}) do
-    with {:ok, items} = Item.add_item(id, "350941") do
+    with {:ok, _items} <- Item.add_item(id, "350941") do
       conn
       |> put_flash(:info, "Successfully added beer to menu!")
       |> redirect(to: Routes.search_path(conn, :index))
