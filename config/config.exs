@@ -10,6 +10,9 @@ use Mix.Config
 config :just_in_tappd,
   ecto_repos: [JustInTappd.Repo]
 
+# Set the application's default locale
+config :gettext, :default_locale, System.get_env("LOCALE_LANGUAGE") || "en"
+
 # Configures the endpoint
 config :just_in_tappd, JustInTappdWeb.Endpoint,
   url: [host: "localhost"],

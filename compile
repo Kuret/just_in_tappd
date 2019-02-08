@@ -1,3 +1,2 @@
 cd $phoenix_dir
 yarn --cwd ./assets build
-mix "${phoenix_ex}.digest"

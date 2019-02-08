@@ -26,17 +26,18 @@ end
 # which you should run after static files are built and
 # before starting your production server.
 config :just_in_tappd, JustInTappdWeb.Endpoint,
+  http: [port: {:system, "PORT"}],
+  url: [scheme: "https", host: Prod.Config.host(), port: 443],
+  force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/cache_manifest.json",
   check_origin: Prod.Config.origins(),
-  force_ssl: [rewrite_on: [:x_forwarded_proto]],
-  load_from_system_env: true,
-  secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE"),
-  url: [scheme: "https", host: Prod.Config.host(), port: 443]
+  secret_key_base: System.get_env("SECRET_KEY_BASE")
 
 # Do not print debug messages in production
 config :logger, level: :info
 
-config :just_in_tappd, JustInTapp.Repo,
+config :just_in_tappd, JustInTappd.Repo,
+  migration_timestamps: [type: :naive_datetime_usec],
   adapter: Ecto.Adapters.Postgres,
   url: System.get_env("DATABASE_URL"),
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
