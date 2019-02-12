@@ -10,6 +10,8 @@ defmodule JustInTappd.Guardian do
   alias Ecto.UUID
   alias JustInTappd.Accounts
   alias JustInTappd.Accounts.User
+  alias JustInTappd.Mailer
+  alias JustInTappd.Mailer.Email
 
   # Serialize user
   def subject_for_token(%User{id: user_id}, _claims) when not is_nil(user_id),
@@ -30,7 +32,7 @@ defmodule JustInTappd.Guardian do
 
   def resource_from_claims(_claims), do: {:error, "Unknown resource type"}
 
-  def deliver_magic_link(_user, magic_token, _opts) do
+  def deliver_magic_link(user, magic_token, _opts) do
     require Logger
 
     import JustInTappdWeb.Router.Helpers
@@ -41,6 +43,11 @@ defmodule JustInTappd.Guardian do
       Logger.info("""
         AUTH URL: #{auth_url(Endpoint, :callback, magic_token)}
       """)
+    end
+
+    if Application.get_env(:just_in_tappd, JustInTappd.Mailer)[:api_key] do
+      Email.login_email(user, auth_url(Endpoint, :callback, magic_token))
+      |> Mailer.deliver_later()
     end
   end
 end
