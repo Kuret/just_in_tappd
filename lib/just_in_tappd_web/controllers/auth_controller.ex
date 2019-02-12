@@ -2,11 +2,25 @@ defmodule JustInTappdWeb.AuthController do
   use JustInTappdWeb, :controller
 
   alias JustInTappd.Accounts
+  alias JustInTappd.Accounts.User
   alias JustInTappd.Guardian
 
-  def new(_conn, %{"email" => email}) do
-    user = Accounts.get_by_email(email)
-    Guardian.send_magic_link(user)
+  def login(conn, _) do
+    render(conn, "login.html")
+  end
+
+  def authorize(conn, %{"email" => email}) do
+    with %User{} = user <- Accounts.get_by_email(email),
+         {:ok, _token, _claims} <- Guardian.send_magic_link(user) do
+      conn
+      |> put_flash(:info, "Login link sent to your e-mail address.")
+      |> redirect(to: Routes.auth_path(conn, :login))
+    else
+      _ ->
+        conn
+        |> put_flash(:error, "Error logging you in.")
+        |> redirect(to: Routes.auth_path(conn, :login))
+    end
   end
 
   def callback(conn, %{"magic_token" => magic_token}) do
@@ -31,8 +45,7 @@ defmodule JustInTappdWeb.AuthController do
 
   def auth_error(conn, _error, _opts) do
     conn
-    |> put_flash(:error, "Authentication error.")
-    |> redirect(to: Routes.page_path(conn, :index))
+    |> redirect(to: Routes.auth_path(conn, :login))
     |> halt()
   end
 end

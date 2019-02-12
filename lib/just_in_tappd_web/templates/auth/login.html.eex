@@ -1,0 +1,23 @@
+<section class="section">
+  <div class="row">
+    <div class="col s4 offset-s4">
+      <div class="row">
+        <h1> <%= gettext "Welcome to %{name}!", name: "just_in_tappd" %> </h1>
+      </div>
+      <div class="row">
+        <p>Please log in</p>
+      </div>
+      <div class="row">
+        <%= form_for @conn, Routes.auth_path(@conn, :authorize), fn f -> %>
+          <div class="form <%= if Enum.any?(f.errors), do: "has-error" %>">
+            <div class="input-field">
+              <%= search_input f, :email, id: "email_field", autofocus: true %>
+              <label for="email_field">Email</label>
+              <%= submit "Login" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

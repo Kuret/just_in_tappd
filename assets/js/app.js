@@ -19,6 +19,8 @@ import $ from "jquery"
 // import socket from "./socket"
 
 $(document).ready(function(){
+  M.Dropdown.init($('.dropdown-trigger'))
+
   let infoAlert = $('.alert.alert-info')
   let errorAlert = $('.alert.alert-danger')
 
