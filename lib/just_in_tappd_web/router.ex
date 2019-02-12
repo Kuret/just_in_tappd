@@ -36,14 +36,6 @@ defmodule JustInTappdWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/login", JustInTappdWeb do
-    pipe_through [:browser, :unauthenticated]
-
-    get "/", AuthController, :login
-    post "/", AuthController, :authorize
-    get "/:magic_token", AuthController, :callback
-  end
-
   scope "/", JustInTappdWeb do
     pipe_through [:browser, :authenticated]
 
@@ -52,6 +44,14 @@ defmodule JustInTappdWeb.Router do
     post "/search/:id", SearchController, :create
 
     get "/logout", AuthController, :destroy
+  end
+
+  scope "/login", JustInTappdWeb do
+    pipe_through [:browser, :unauthenticated]
+
+    get "/", AuthController, :login
+    post "/", AuthController, :authorize
+    get "/:magic_token", AuthController, :callback
   end
 
   # Other scopes may use custom stacks.

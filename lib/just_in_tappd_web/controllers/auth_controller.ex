@@ -2,11 +2,18 @@ defmodule JustInTappdWeb.AuthController do
   use JustInTappdWeb, :controller
 
   alias JustInTappd.Accounts
+  alias JustInTappd.Accounts.Session
   alias JustInTappd.Accounts.User
   alias JustInTappd.Guardian
 
   def login(conn, _) do
-    render(conn, "login.html")
+    IO.inspect(Session.current_user(conn))
+
+    with %User{} <- Session.current_user(conn) do
+      redirect(conn, to: Routes.page_path(conn, :index))
+    else
+      _ -> render(conn, "login.html")
+    end
   end
 
   def authorize(conn, %{"email" => email}) do
@@ -41,6 +48,12 @@ defmodule JustInTappdWeb.AuthController do
     conn
     |> Guardian.Plug.sign_out()
     |> redirect(to: Routes.page_path(conn, :index))
+  end
+
+  def auth_error(conn, {:already_authenticated, _}, _opts) do
+    conn
+    |> redirect(to: Routes.page_path(conn, :index))
+    |> halt()
   end
 
   def auth_error(conn, _error, _opts) do
