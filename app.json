@@ -42,10 +42,10 @@
   "addons": ["heroku-postgresql", "papertrail", "scout"],
   "buildpacks": [
     {
-      "url": "https://github.com/heroku/heroku-buildpack-nodejs.git"
+      "url": "https://github.com/HashNuke/heroku-buildpack-elixir.git"
     },
     {
-      "url": "https://github.com/HashNuke/heroku-buildpack-elixir.git"
+      "url": "https://github.com/gjaldon/heroku-buildpack-phoenix-static.git"
     }
   ]
 }
