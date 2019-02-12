@@ -37,6 +37,9 @@
   "formation": {
     "web": {
       "size": "free"
+    },
+    "release": {
+      "size": "free"
     }
   },
   "addons": ["heroku-postgresql"],
