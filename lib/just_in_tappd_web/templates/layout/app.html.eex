@@ -4,6 +4,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>JustInTappd · Phoenix Framework</title>
   </head>
   <body>
@@ -12,24 +13,48 @@
 
         <a href="#" class="brand-logo left">JustInTappd</a>
 
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li>
-            <a href="beer.html">
-              <%= gettext "Beer" %>
-            </a>
-          </li>
-          <li>
-            <a href="orders.html">
-              <%= gettext "Orders" %>
-            </a>
-          </li>
-          <li>
-            <a href="sales.html">
-              <%= gettext "Sales" %>
-            </a>
-          </li>
-        </ul>
-
+        <%= with %User{} = user <- Session.current_user(@conn) do %>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li>
+              <a href="beer.html">
+                <%= gettext "Beer" %>
+              </a>
+            </li>
+            <li>
+              <a href="orders.html">
+                <%= gettext "Orders" %>
+              </a>
+            </li>
+            <li>
+              <a href="sales.html">
+                <%= gettext "Sales" %>
+              </a>
+            </li>
+            <li>
+              <a href="#!" class="dropdown-trigger" data-target="dropdown-user">
+                <i class="material-icons left">person</i>
+                <%= user.first_name %> <%= user.last_name %>
+                <i class="material-icons right">arrow_drop_down</i>
+              </a>
+            </li>
+          </ul>
+          
+          <!-- User Dropdown -->
+          <ul id="dropdown-user" class="dropdown-content">
+            <li><a href="#!">Account</a></li>
+            <li><a href="#!">Settings</a></li>
+            <li class="divider"></li>
+            <li><a href="/logout">Sign Out</a></li>
+          </ul>
+        <% else _ -> %>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li>
+              <a href="/login">
+                <%= gettext "Login" %>
+              </a>
+            </li>
+          </ul>
+        <% end %>
       </div>
     </nav>
     <main role="main" class="container">
