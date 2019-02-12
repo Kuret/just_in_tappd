@@ -39,8 +39,8 @@ defmodule JustInTappdWeb.Router do
   scope "/login", JustInTappdWeb do
     pipe_through [:browser, :unauthenticated]
 
-    get "/", AuthController, :new
-    post "/", AuthController, :create
+    get "/", AuthController, :login
+    post "/", AuthController, :authorize
     get "/:magic_token", AuthController, :callback
   end
 

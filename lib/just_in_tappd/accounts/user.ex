@@ -6,11 +6,8 @@ defmodule JustInTappd.Accounts.User do
   use Ecto.Schema
 
   import Ecto.Changeset
-  import Ecto.Query
 
-  alias JustInTappd.Accounts
   alias JustInTappd.Accounts.User
-  alias Ecto.Changeset
 
   @primary_key {:id, :binary_id, autogenerate: true}
 
@@ -24,7 +21,7 @@ defmodule JustInTappd.Accounts.User do
   end
 
   @doc false
-  def changeset(%User{} = user, attrs, opts \\ %{}) do
+  def changeset(%User{} = user, attrs, _opts \\ %{}) do
     user
     |> cast(attrs, [
       :email,
