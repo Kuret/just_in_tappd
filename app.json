@@ -17,9 +17,28 @@
     },
     "HEROKU_APP_NAME": {
       "required": true
+    },
+    "SENDGRID_API_KEY": {
+      "required": true
+    },
+    "POOL_SIZE": {
+      "required": true
+    },
+    "UT_RO_KEY": {
+      "required": true
+    },
+    "UT_RW_KEY": {
+      "required": true
+    },
+    "UT_USER": {
+      "required": true
     }
   },
-  "formation": {},
+  "formation": {
+    "web": {
+      "size": "free"
+    }
+  },
   "addons": ["heroku-postgresql", "papertrail", "scout"],
   "buildpacks": [
     {
