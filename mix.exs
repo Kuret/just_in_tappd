@@ -33,6 +33,8 @@ defmodule JustInTappd.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:bamboo, "~> 1.2"},
+      {:guardian, "~> 1.0"},
       {:phoenix, "~> 1.4.0"},
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix_ecto, "~> 4.0"},
@@ -43,7 +45,8 @@ defmodule JustInTappd.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:ex_tappd, git: "https://github.com/kuret/ex_tappd.git"}
+      {:ex_tappd, git: "https://github.com/kuret/ex_tappd.git"},
+      {:sans_password, "~> 1.0.0-beta"}
     ]
   end
 

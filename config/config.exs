@@ -25,6 +25,17 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+# Guardian
+config :just_in_tappd, JustInTappd.Guardian,
+  allowed_algos: ["HS512"],
+  verify_module: Guardian.JWT,
+  issuer: "JustInTappd",
+  ttl: {30, :days},
+  allowed_drift: 2000,
+  verify_issuer: true,
+  secret_key: System.get_env("SECRET_KEY_BASE") || "1234",
+  serializer: JustInTappd.Guardian
+
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
