@@ -3,19 +3,25 @@
   "license": "MIT",
   "scripts": {
     "heroku-postbuild": "yarn build",
-    "build": "parcel build static/js/app.js --out-dir priv/static/js",
-    "watch": "parcel watch static/js/app.js --out-dir priv/static/js"
+    "build": "./node_modules/.bin/brunch build --production",
+    "watch": "./node_modules/.bin/brunch watch --stdin"
   },
   "engines": {
     "yarn": "^1.13.0",
     "node": "11.8.0"
   },
   "dependencies": {
-    "@babel/core": "^7.2.2",
-    "babel-preset-env": "^1.7.0",
+    "babel-brunch": "^7.0.0",
     "brunch": "^2.10.17",
+    "clean-css-brunch": "^2.10.0",
+    "css-brunch": "^2.10.0",
+    "foundation-sites": "^6.5.3",
+    "javascript-brunch": "^2.10.0",
     "jquery": "^3.3.1",
+    "normalize-scss": "^7.0.1",
     "phoenix": "file:deps/phoenix",
-    "phoenix_html": "file:deps/phoenix_html"
+    "phoenix_html": "file:deps/phoenix_html",
+    "sass-brunch": "^2.10.8",
+    "uglify-js-brunch": "^2.10.0"
   }
 }
