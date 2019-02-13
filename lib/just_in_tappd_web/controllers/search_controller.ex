@@ -4,9 +4,11 @@ defmodule JustInTappdWeb.SearchController do
   alias ExTappd.Item
 
   def index(conn, %{"query" => query}) do
-    {:ok, items} = Item.search_item(query)
-
-    render(conn, "index.html", items: items)
+    with {:ok, items} <- Item.search_item(query) do
+      render(conn, "index.html", items: items)
+    else
+      _ -> render(conn, "index.html")
+    end
   end
 
   def index(conn, _params) do
