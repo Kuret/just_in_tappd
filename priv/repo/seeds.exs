@@ -12,7 +12,7 @@ alias JustInTappd.Accounts.User
 
 %User{
   id: Ecto.UUID.generate(),
-  email: "ronalddijkstra@gmail.com",
+  email: "ronalddijkstra.nl@gmail.com",
   first_name: "Ronald",
   last_name: "Dijkstra",
   active: true
