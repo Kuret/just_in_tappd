@@ -31,6 +31,10 @@ config :just_in_tappd, JustInTappd.Guardian,
   verify_module: Guardian.JWT,
   issuer: "JustInTappd",
   ttl: {30, :days},
+  token_ttl: %{
+    "magic" => {30, :minutes},
+    "access" => {1, :days}
+  },
   allowed_drift: 2000,
   verify_issuer: true,
   secret_key: System.get_env("SECRET_KEY_BASE") || "1234",

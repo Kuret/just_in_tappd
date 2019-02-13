@@ -10,7 +10,7 @@
     <div class="col 6 offset-s3">
       <%= form_for @conn, Routes.search_path(@conn, :index), [method: :get], fn f -> %>
         <div class="input-field">
-          <%= search_input f, :query, id: "search_field", autofocus: true %>
+          <%= search_input f, :query, id: "search_field", type: "search", autofocus: true %>
           <label for="search_field">Search</label>
           <%= submit "Search" %>
         </div>
