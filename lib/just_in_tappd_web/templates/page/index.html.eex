@@ -1,22 +1,20 @@
-<section class="section">
-  <div class="row">
-    <div class="col s6 offset-s3">
-      <h1>
-        <%= gettext "Welcome to %{name}!", name: "just_in_tappd" %>
-      </h1>
-    </div>
+<div class="grid-x align-center">
+  <div class="cell small-6">
+    <h1>
+      <%= gettext "Welcome to %{name}!", name: "just_in_tappd" %>
+    </h1>
   </div>
-  <div class="row">
-    <div class="col s6 offset-s3">
-      <p>
-        We ❤️ you Just in Beer.
-      </p>
-    </div>
+</div>
+<div class="grid-x align-center">
+  <div class="cell small-6">
+    <p>
+      We ❤️ you Just in Beer.
+    </p>
   </div>
-</section>
+</div>
 
-<section class="section">
-  <div class="row">
+<div class="grid-x align-center">
+  <div class="cell small-10">
       <table style="width:100%">
         <tr>
           <th>Firstname</th>
@@ -35,4 +33,4 @@
         </tr>
     </table>
   </div>
-</section>
+</div>

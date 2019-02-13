@@ -4,17 +4,22 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>JustInTappd · Phoenix Framework</title>
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>">
   </head>
   <body>
-    <nav class="light-blue">
-      <div class="nav-wrapper container">
+    <nav class="top-bar">
+      <div class="top-bar-left">
+        <ul class="menu">
+          <li class="menu-text">
+            <a href="/">JustInTappd</a>
+          </li>
+        </ul>
+      </div>
 
-        <a href="#" class="brand-logo left">JustInTappd</a>
-
-        <%= with %User{} = user <- Session.current_user(@conn) do %>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <div class="top-bar-rigt">
+        <ul class="dropdown menu" data-dropdown-menu>
+          <%= with %User{} = user <- Session.current_user(@conn) do %>
             <li>
               <a href="beer.html">
                 <%= gettext "Beer" %>
@@ -30,37 +35,32 @@
                 <%= gettext "Sales" %>
               </a>
             </li>
-            <li>
-              <a href="#!" class="dropdown-trigger" data-target="dropdown-user">
-                <i class="material-icons left">person</i>
+            <li class="has-submenu">
+              <a href="#">
                 <%= user.first_name %> <%= user.last_name %>
-                <i class="material-icons right">arrow_drop_down</i>
+              </a>
+              <ul class="submenu menu vertical">
+                <li><a href="#">Account</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="/logout">Sign Out</a></li>
               </a>
             </li>
-          </ul>
-          
-          <!-- User Dropdown -->
-          <ul id="dropdown-user" class="dropdown-content">
-            <li><a href="#!">Account</a></li>
-            <li><a href="#!">Settings</a></li>
-            <li class="divider"></li>
-            <li><a href="/logout">Sign Out</a></li>
-          </ul>
-        <% else _ -> %>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <% else _ -> %>
             <li>
               <a href="/login">
                 <%= gettext "Login" %>
               </a>
             </li>
-          </ul>
-        <% end %>
+          <% end %>
+        </ul>
       </div>
     </nav>
-    <main role="main" class="container">
+    <main role="main" class="main-content">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-      <%= render @view_module, @view_template, assigns %>
+      <div class="grid-container">
+        <%= render @view_module, @view_template, assigns %>
+      </div>
     </main>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </body>

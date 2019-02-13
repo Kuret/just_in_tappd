@@ -1,23 +1,37 @@
-<section class="section">
-  <div class="row">
-    <div class="col s4 offset-s4">
-      <div class="row">
+<div class="grid-x align-center">
+  <div class="cell small-6">
+    <div class="grid-x">
+      <div class="cell">
         <h1> <%= gettext "Welcome to %{name}!", name: "just_in_tappd" %> </h1>
       </div>
-      <div class="row">
+      <div class="cell">
         <p>Please log in</p>
-      </div>
-      <div class="row">
-        <%= form_for @conn, Routes.auth_path(@conn, :authorize), fn f -> %>
-          <div class="form <%= if Enum.any?(f.errors), do: "has-error" %>">
-            <div class="input-field">
-              <%= search_input f, :email, id: "email_field", autofocus: true %>
-              <label for="email_field">Email</label>
-              <%= submit "Login" %>
-            </div>
-          </div>
-        <% end %>
       </div>
     </div>
   </div>
-</section>
+</div>
+
+<div class="grid-x align-center">
+  <div class="cell small-6">
+    <%= form_for @conn, Routes.auth_path(@conn, :authorize), fn f -> %>
+      <div class="form <%= if Enum.any?(f.errors), do: "has-error" %>">
+        <div class="grid-x">
+          <div class="cell">
+            <label for="email_field">Email</label>
+          </div>
+          <div class="cell">
+            <div class="grid-x grid-margin-x">
+              <div class="cell small-6">
+                <%= search_input f, :email, id: "email_field", autofocus: true %>
+              </div>
+              <div class="cell small-6">
+                <%= submit "Login", class: "button" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
