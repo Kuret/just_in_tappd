@@ -1,11 +1,11 @@
 <div class="grid-x align-center">
-  <div class="cell small-6">
+  <div class="cell small-8">
     <div class="grid-x">
       <div class="cell">
-        <h1> <%= gettext "Welcome to %{name}!", name: "just_in_tappd" %> </h1>
+        <h1> <%= gettext "Welcome to %{name}!", name: "Just in Business" %> </h1>
       </div>
       <div class="cell">
-        <p>Please log in</p>
+        <p>Inloggen aub</p>
       </div>
     </div>
   </div>
@@ -34,4 +34,3 @@
     <% end %>
   </div>
 </div>
-

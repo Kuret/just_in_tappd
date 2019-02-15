@@ -1,7 +1,7 @@
 <div class="grid-x align-center">
-  <div class="cell small-6">
+  <div class="cell small-8">
     <h1>
-      <%= gettext "Welcome to %{name}!", name: "just_in_tappd" %>
+      <%= gettext "Welcome to %{name}!", name: "Just in Business" %>
     </h1>
   </div>
 </div>
@@ -15,22 +15,6 @@
 
 <div class="grid-x align-center">
   <div class="cell small-10">
-      <table style="width:100%">
-        <tr>
-          <th>Firstname</th>
-          <th>Lastname</th>
-          <th>Age</th>
-        </tr>
-        <tr>
-          <td>Jill</td>
-          <td>Smith</td>
-          <td>50</td>
-        </tr>
-        <tr>
-          <td>Eve</td>
-          <td>Jackson</td>
-          <td>94</td>
-        </tr>
-    </table>
+
   </div>
 </div>
