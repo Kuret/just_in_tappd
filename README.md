@@ -14,6 +14,7 @@ To start your Phoenix server:
   * Install dependencies with `mix deps.get`
   * Create and migrate your database with `mix ecto.setup`
   * Install Yarn dependencies with `yarn && yarn build`
+  * Run the seeds with `mix run priv/repo/seeds.exs`
   * Start Phoenix endpoint with `mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
