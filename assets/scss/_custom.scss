@@ -1,3 +1,15 @@
 .dropdown.menu > li > a {
   background: inherit;
 }
+
+.alert {
+  border-radius: 5px;
+  line-height: 1.2;
+  padding-left: 1em;
+
+  &.alert-danger {
+    background: $alert-color;
+    box-shadow: 0 0 1px $alert-color inset;
+    color: $alert-text;
+  }
+}

@@ -73,7 +73,7 @@ $foundation-palette: (
   secondary: #767676,
   success: #3adb76,
   warning: #ffae00,
-  alert: #cc4b37,
+  alert: #fbd0dc,
 );
 $light-gray: #e6e6e6;
 $medium-gray: #cacaca;
@@ -98,6 +98,9 @@ $global-prototype-breakpoints: false;
 $global-button-cursor: auto;
 $global-color-pick-contrast-tolerance: 0;
 $print-transparent-backgrounds: true;
+
+// Custom Colori
+$alert-text: #b23455;
 
 @include add-foundation-colors;
 
@@ -866,4 +869,3 @@ $grid-padding-gutters: $grid-margin-gutters;
 $grid-container-padding: $grid-padding-gutters;
 $grid-container-max: $global-width;
 $xy-block-grid-max: 8;
-
