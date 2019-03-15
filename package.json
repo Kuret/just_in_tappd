@@ -7,8 +7,8 @@
     "watch": "./node_modules/.bin/brunch watch --stdin"
   },
   "engines": {
-    "yarn": "^1.13.0",
-    "node": "11.8.0"
+    "node": "11.8.0",
+    "yarn": "1.x"
   },
   "dependencies": {
     "babel-brunch": "^7.0.0",
