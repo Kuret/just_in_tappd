@@ -18,7 +18,6 @@ defmodule JustInTappd.Products.Product do
     field(:name, :string)
     field(:producer, :string)
     field(:abv, :decimal)
-    field(:expiration_date, :naive_datetime, default: nil)
     field(:price, :decimal)
     field(:stock, :integer, default: 0)
 
@@ -28,7 +27,8 @@ defmodule JustInTappd.Products.Product do
     timestamps()
 
     # TODO: Add Later
-    # field(:size, :binary_id)
+    # field(:expiration_date, :naive_datetime, default: nil) -> Products.Batch
+    # field(:size, :binary_id) -> Product.Types?? (can, bottle, etc)
     # field(:supplier_id, :binary_id)
   end
 
@@ -41,7 +41,6 @@ defmodule JustInTappd.Products.Product do
       :name,
       :producer,
       :abv,
-      :expiration_date,
       :price,
       :stock
     ])
@@ -60,7 +59,6 @@ defmodule JustInTappd.Products.Product do
       :name,
       :producer,
       :abv,
-      :expiration_date,
       :price,
       :stock
     ])
