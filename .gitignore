@@ -1,5 +1,7 @@
 .DS_Store
 
+.elixir_ls/
+
 # Created by css modules.
 # /assets/**/*.css.json
 # /lib/**/*.css.json

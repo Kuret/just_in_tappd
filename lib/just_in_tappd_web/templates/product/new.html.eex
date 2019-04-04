@@ -1,0 +1,19 @@
+<div class="grid-x">
+  <div class="cell">
+    <h1>
+      <%= gettext "Add Product" %>
+    </h1>
+  </div>
+  <div class="cell small-8">
+    <%= form_for @changeset, Routes.product_path(@conn, :new), fn f -> %>
+      <div class="grid-x grid-margin-x">
+        <div class="cell small-6">
+          <%= text_input f, :name, id: "name_field", placeholder: "Name" %>
+        </div>
+        <div class="cell small-4">
+          <%= submit "Add Product", class: "button" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
