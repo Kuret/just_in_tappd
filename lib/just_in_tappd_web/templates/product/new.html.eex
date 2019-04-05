@@ -5,14 +5,49 @@
     </h1>
   </div>
   <div class="cell small-8">
-    <%= form_for @changeset, Routes.product_path(@conn, :new), fn f -> %>
+    <%= form_for @changeset, Routes.product_path(@conn, :create), fn f -> %>
       <div class="grid-x grid-margin-x">
         <div class="cell small-6">
-          <%= text_input f, :name, id: "name_field", placeholder: "Name" %>
+          <span>
+            Name:
+            <%= text_input f, :name, id: "name_field", placeholder: "Name" %>
+          </span>
+
+          <span>
+            Brewery:
+            <%= text_input f, :producer, id: "producer_field", placeholder: "Brewery" %>
+          </span>
+
+          <span>
+            ABV:
+            <%= number_input f, :abv, id: "abv_field", placeholder: "ABV", step: "0.05" %>
+          </span>
+
+          <span>
+            Stock:
+            <%= number_input f, :stock, id: "stock_field", placeholder: "Stock", step: "1", value: "" %>
+          </span>
+
+          <span>
+            Price:
+            <%= number_input f, :price, id: "price_field", placeholder: "Price", step: "0.01" %>
+          </span>
         </div>
+        <div class="cell small-2"></div>
         <div class="cell small-4">
-          <%= submit "Add Product", class: "button" %>
+          <span>
+            Untappd ID:
+            <%= text_input f, :untappd_id, id: "ut_id_field", placeholder: "Untappd ID" %>
+          </span>
+
+          <span>
+            Barcode:
+            <%= text_input f, :barcode, id: "barcode_field", placeholder: "Barcode" %>
+          </span>
         </div>
+      </div>
+      <div class="grid-y grid-margin-x">
+        <%= submit "Add Product", class: "button" %>
       </div>
     <% end %>
   </div>
