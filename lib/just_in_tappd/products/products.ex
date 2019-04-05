@@ -36,10 +36,38 @@ defmodule JustInTappd.Products do
   Creates a Product
   """
   def create_product(%{} = attrs, %User{} = user) do
-    %Product{}
-    |> Product.update_changeset(attrs, user)
-    |> Repo.insert()
+    with %Product{} = product <- get_duplicate(attrs) do
+      new_stock =
+        with stock <- attrs["stock"],
+             true <- is_binary(stock),
+             {num, _} <- Integer.parse(stock) do
+          num + (product.stock || 0)
+        else
+          _ -> product.stock
+        end
+
+      update_product(
+        product,
+        %{
+          stock: new_stock,
+          price: attrs["price"] || product.price,
+          barcode: attrs["barcode"] || product.barcode,
+          abv: attrs["abv"] || product.abv
+        },
+        user
+      )
+    else
+      _ ->
+        %Product{}
+        |> Product.update_changeset(attrs, user)
+        |> Repo.insert()
+    end
   end
+
+  defp get_duplicate(%{"untappd_id" => untappd_id, "name" => name}),
+    do: Repo.get_by(Product, untappd_id: untappd_id, name: name)
+
+  defp get_duplicate(_), do: nil
 
   @doc """
   Updates a Product
