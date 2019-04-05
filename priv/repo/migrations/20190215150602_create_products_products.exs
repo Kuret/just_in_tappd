@@ -15,6 +15,8 @@ defmodule JustInTappd.Repo.Migrations.CreateProductsProducts do
 
       add(:created_by_id, references(:accounts_users, type: :uuid, on_delete: :nilify_all))
       add(:updated_by_id, references(:accounts_users, type: :uuid, on_delete: :nilify_all))
+
+      timestamps()
     end
 
     create(unique_index(:products_products, [:name, :barcode]))
