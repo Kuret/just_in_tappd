@@ -43,7 +43,7 @@ defmodule JustInTappdWeb.Router do
     get "/search", SearchController, :index
     post "/search/:id", SearchController, :create
 
-    resources("/products", ProductController, only: [:new, :create])
+    resources("/products", ProductController, only: [:index, :new, :create])
     post("/products/new", ProductController, :new)
 
     get "/logout", AuthController, :destroy
