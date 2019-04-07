@@ -1,0 +1,29 @@
+<div class="grid-x">
+  <div class="cell">
+    <h1>
+      <%= gettext "Products" %>
+    </h1>
+  </div>
+</div>
+
+<%= if assigns[:products] && Enum.any?(@products) do %>
+    <%= for product <- @products do %>
+      <div class="grid-x grid-margin-x grid-margin-y">
+        <div class="cell small-6">
+          <div class="cell"><%= product.name %></div>
+          <div class="cell"><%= product.producer %></div>
+        </div>
+        <div class="cell small-2">
+          <%= button("Update",
+                     to: Routes.product_path(@conn, :new, %{
+                       untappd_id: product.untappd_id,
+                       name: product.name,
+                       producer: product.producer,
+                       abv: to_string(product.abv)}),
+                     class: "button") %>
+        </div>
+        <div class="cell small-2">
+        </div>
+      </div>
+    <% end %>
+<% end %>

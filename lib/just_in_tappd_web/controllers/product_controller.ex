@@ -7,6 +7,24 @@ defmodule JustInTappdWeb.ProductController do
   alias JustInTappd.Products
   alias JustInTappd.Products.Product
 
+  def index(conn, %{"stock" => "all"}) do
+    with [_ | _] = products <- Products.list_all_products() do
+      render(conn, "index.html", products: products)
+    end
+  end
+
+  def index(conn, %{"stock" => "no"}) do
+    with [_ | _] = products <- Products.list_products(false) do
+      render(conn, "index.html", products: products)
+    end
+  end
+
+  def index(conn, _attrs) do
+    with [_ | _] = products <- Products.list_products() do
+      render(conn, "index.html", products: products)
+    end
+  end
+
   def new(conn, attrs \\ %{}) do
     user = Session.current_user(conn)
 
