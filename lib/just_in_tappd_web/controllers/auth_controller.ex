@@ -7,8 +7,6 @@ defmodule JustInTappdWeb.AuthController do
   alias JustInTappd.Guardian
 
   def login(conn, _) do
-    IO.inspect(Session.current_user(conn))
-
     with %User{} <- Session.current_user(conn) do
       redirect(conn, to: Routes.page_path(conn, :index))
     else

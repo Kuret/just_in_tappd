@@ -20,13 +20,22 @@
 
 <%= if assigns[:items] && Enum.any?(@items) do %>
     <%= for item <- @items do %>
-      <div class="grid-x grid-margin-y">
+      <div class="grid-x grid-margin-x grid-margin-y">
         <div class="cell small-6">
           <div class="cell"><%= item.name %></div>
           <div class="cell"><%= item.brewery %></div>
         </div>
-        <div class="cell small-4">
+        <div class="cell small-2">
           <%= button("Add to menu", to: Routes.search_path(@conn, :create, item.untappd_id), method: "post", class: "button") %>
+        </div>
+        <div class="cell small-2">
+          <%= button("Add to inventory",
+                     to: Routes.product_path(@conn, :new, %{
+                       untappd_id: item.untappd_id,
+                       name: item.name,
+                       producer: item.brewery,
+                       abv: item.abv}),
+                     class: "button") %>
         </div>
       </div>
     <% end %>
