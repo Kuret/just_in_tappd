@@ -50,4 +50,22 @@ defmodule JustInTappdWeb.ProductController do
         error
     end
   end
+
+  def edit(conn, %{"id" => id}) do
+    user = Session.current_user(conn)
+
+    with %Product{} = product <- Products.get_product(id),
+         %Changeset{} = changeset <- Product.update_changeset(product, %{}, user) do
+      render(conn, "new.html", changeset: changeset)
+    end
+  end
+
+  def update(conn, %{"id" => id, "product" => product_params}) do
+    user = Session.current_user(conn)
+
+    with %Product{} = product <- Products.get_product(id),
+         %Product{} <- Products.update_product(product, product_params, user) do
+      redirect(conn, to: Routes.product_path(conn, :index))
+    end
+  end
 end

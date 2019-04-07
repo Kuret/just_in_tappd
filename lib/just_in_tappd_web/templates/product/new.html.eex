@@ -25,7 +25,8 @@
 
           <span>
             Stock:
-            <%= number_input f, :stock, id: "stock_field", placeholder: "Stock", step: "1", value: "" %>
+            <%= number_input f, :stock, id: "stock_field", placeholder: "Stock", step: "1",
+                value: (f.data.stock == 0 && "" || f.data.stock) %>
           </span>
 
           <span>
