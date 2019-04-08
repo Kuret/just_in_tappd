@@ -1,11 +1,11 @@
 <div class="grid-x">
   <div class="cell">
     <h1>
-      <%= gettext "Add Product" %>
+      <%= @title %>
     </h1>
   </div>
   <div class="cell small-8">
-    <%= form_for @changeset, Routes.product_path(@conn, :create), fn f -> %>
+    <%= form_for @changeset, @submit_path, fn f -> %>
       <div class="grid-x grid-margin-x">
         <div class="cell small-6">
           <span>
@@ -48,7 +48,7 @@
         </div>
       </div>
       <div class="grid-y grid-margin-x">
-        <%= submit "Add Product", class: "button" %>
+        <%= submit @title, class: "button" %>
       </div>
     <% end %>
   </div>

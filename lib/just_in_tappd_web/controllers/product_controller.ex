@@ -29,7 +29,11 @@ defmodule JustInTappdWeb.ProductController do
     user = Session.current_user(conn)
 
     with %Changeset{} = changeset <- Product.create_changeset(attrs, user) do
-      render(conn, "new.html", changeset: changeset)
+      render(conn, "new.html",
+        changeset: changeset,
+        title: gettext("Add Product"),
+        submit_path: Routes.product_path(conn, :create)
+      )
     end
   end
 
@@ -40,11 +44,15 @@ defmodule JustInTappdWeb.ProductController do
       {:ok, %Product{}} ->
         conn
         |> put_flash(:info, gettext("Added beer to inventory"))
-        |> redirect(to: Routes.product_path(conn, :new))
+        |> redirect(to: Routes.product_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         conn
-        |> render("new.html", changeset: changeset)
+        |> render("new.html",
+          changeset: changeset,
+          title: gettext("Add Product"),
+          submit_path: Routes.product_path(conn, :create)
+        )
 
       error ->
         error
@@ -56,16 +64,35 @@ defmodule JustInTappdWeb.ProductController do
 
     with %Product{} = product <- Products.get_product(id),
          %Changeset{} = changeset <- Product.update_changeset(product, %{}, user) do
-      render(conn, "new.html", changeset: changeset)
+      render(conn, "new.html",
+        changeset: changeset,
+        title: gettext("Update Product"),
+        submit_path: Routes.product_path(conn, :update, product)
+      )
     end
   end
 
   def update(conn, %{"id" => id, "product" => product_params}) do
     user = Session.current_user(conn)
 
-    with %Product{} = product <- Products.get_product(id),
-         %Product{} <- Products.update_product(product, product_params, user) do
-      redirect(conn, to: Routes.product_path(conn, :index))
+    with %Product{} = product <- Products.get_product(id) do
+      case Products.update_product(product, product_params, user) do
+        {:ok, %Product{}} ->
+          conn
+          |> put_flash(:info, gettext("Updated beer details"))
+          |> redirect(to: Routes.product_path(conn, :index))
+
+        {:error, %Ecto.Changeset{} = changeset} ->
+          conn
+          |> render("new.html",
+            changeset: changeset,
+            title: gettext("Update Product"),
+            submit_path: Routes.product_path(conn, :update, product)
+          )
+
+        error ->
+          error
+      end
     end
   end
 end
