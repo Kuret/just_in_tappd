@@ -10,31 +10,20 @@ defmodule JustInTappdWeb.SearchLive do
 
   def mount(%{query: query, csrf_token: csrf_token}, socket) do
     items = with {:ok, items} <- Item.search_item(query), do: items, else: (_ -> [])
-    do_mount(socket, query: query, items: items, csrf_token: csrf_token)
+
+    {:ok, assign(socket, csrf_token: csrf_token, items: items, query: query)}
   end
 
-  def mount(_, socket), do: do_mount(socket)
+  def handle_event("suggest", %{"query" => query}, socket)
+      when byte_size(query) <= 100,
+      do: return_items(socket, query)
 
-  defp do_mount(socket, opts \\ []) do
-    {:ok,
-     assign(socket,
-       csrf_token: opts[:csrf_token],
-       items: opts[:items],
-       query: opts[:query],
-       result: nil,
-       loading: false
-     )}
-  end
+  def handle_event("suggest", query, socket) when byte_size(query) <= 100,
+    do: return_items(socket, query)
 
-  def handle_event("suggest", query, socket) when byte_size(query) <= 100 do
+  defp return_items(socket, query) do
     items = with {:ok, items} <- Item.search_item(query), do: items, else: (_ -> [])
 
-    {:noreply, assign(socket, items: items, query: query)}
-  end
-
-  def handle_event("suggest", %{"query" => query}, socket) when byte_size(query) <= 100 do
-    items = with {:ok, items} <- Item.search_item(query), do: items, else: (_ -> [])
-
-    {:noreply, assign(socket, items: items, query: query)}
+    {:noreply, assign(socket, items: items)}
   end
 end
