@@ -6,6 +6,7 @@ defmodule JustInTappdWeb.ProductController do
   alias JustInTappd.Accounts.Session
   alias JustInTappd.Products
   alias JustInTappd.Products.Product
+  alias JustInTappdWeb.ProductLive
 
   def index(conn, %{"stock" => "all"}) do
     with [_ | _] = products <- Products.list_all_products() do
@@ -29,10 +30,14 @@ defmodule JustInTappdWeb.ProductController do
     user = Session.current_user(conn)
 
     with %Changeset{} = changeset <- Product.create_changeset(attrs, user) do
-      render(conn, "new.html",
-        changeset: changeset,
-        title: gettext("Add Product"),
-        submit_path: Routes.product_path(conn, :create)
+      live_render(conn, ProductLive,
+        session: %{
+          fill: %{},
+          items: [],
+          changeset: changeset,
+          title: gettext("Add Product"),
+          submit_path: Routes.product_path(conn, :create)
+        }
       )
     end
   end
