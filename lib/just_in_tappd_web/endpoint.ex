@@ -1,6 +1,8 @@
 defmodule JustInTappdWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :just_in_tappd
 
+  socket "/live", Phoenix.LiveView.Socket
+
   socket "/socket", JustInTappdWeb.UserSocket,
     websocket: [timeout: 45_000],
     longpoll: false

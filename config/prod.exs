@@ -31,7 +31,8 @@ config :just_in_tappd, JustInTappdWeb.Endpoint,
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/cache_manifest.json",
   check_origin: Prod.Config.origins(),
-  secret_key_base: System.get_env("SECRET_KEY_BASE")
+  secret_key_base: System.get_env("SECRET_KEY_BASE"),
+  live_view: [signing_salt: System.get_env("SECRET_KEY_BASE")]
 
 # Do not print debug messages in production
 config :logger, level: :info

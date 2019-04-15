@@ -45,7 +45,8 @@ exports.config = {
       options: {
         includePaths: [
           'node_modules/normalize-scss/sass',
-          'node_modules/foundation-sites/scss'
+          'node_modules/foundation-sites/scss',
+          'deps/phoenix_live_view/assets/css/live_view.css'
         ]
       }
     }

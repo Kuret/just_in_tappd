@@ -44,7 +44,8 @@ config :just_in_tappd, JustInTappdWeb.Endpoint,
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
       ~r{lib/just_in_tappd_web/views/.*(ex)$},
-      ~r{lib/just_in_tappd_web/templates/.*(eex)$}
+      ~r{lib/just_in_tappd_web/templates/.*(eex)$},
+      ~r{lib/just_in_tappd_web/live/.*(ex)$}
     ]
   ]
 
