@@ -7,5 +7,5 @@ defmodule JustInTappdWeb.BarcodeController do
     json(conn, :ok)
   end
 
-  def create(conn, opts), do: IO.inspect(opts) && conn
+  def create(conn, _opts), do: json(conn, :invalid_code)
 end

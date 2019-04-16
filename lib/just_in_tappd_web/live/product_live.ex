@@ -1,11 +1,14 @@
 defmodule JustInTappdWeb.ProductLive do
   use Phoenix.LiveView
+  import JustInTappdWeb.Gettext
 
   alias ExTappd.Item
   alias JustInTappd.Accounts.User
   alias JustInTappd.Products
   alias JustInTappd.Products.Product
+  alias JustInTappdWeb.Endpoint
   alias JustInTappdWeb.ProductView
+  alias JustInTappdWeb.Router.Helpers, as: Routes
 
   def render(assigns) do
     ProductView.render("new.html", assigns)
@@ -42,6 +45,31 @@ defmodule JustInTappdWeb.ProductLive do
     case Products.create_product(attrs, user) do
       {:ok, %Product{} = product} ->
         {:noreply, assign(socket, fill: %{}, stock: nil, barcode: nil, added: added ++ [product])}
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        {:noreply, assign(socket, changeset: changeset)}
+
+      _ ->
+        {:noreply, socket}
+    end
+  end
+
+  def handle_event(
+        "update",
+        %{"product" => attrs},
+        %{
+          assigns: %{
+            user: %User{} = user,
+            changeset: %Ecto.Changeset{data: %Product{} = product}
+          }
+        } = socket
+      ) do
+    case Products.update_product(product, attrs, user) do
+      {:ok, %Product{}} ->
+        {:stop,
+         socket
+         |> put_flash(:info, gettext("Updated product"))
+         |> redirect(to: Routes.product_path(Endpoint, :index))}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, changeset: changeset)}

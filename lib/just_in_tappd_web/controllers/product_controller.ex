@@ -2,7 +2,6 @@ defmodule JustInTappdWeb.ProductController do
   use JustInTappdWeb, :controller
 
   alias Ecto.Changeset
-
   alias JustInTappd.Accounts.Session
   alias JustInTappd.Products
   alias JustInTappd.Products.Product
@@ -34,48 +33,12 @@ defmodule JustInTappdWeb.ProductController do
     end
   end
 
-  def create(conn, %{"product" => attrs}) do
-    user = Session.current_user(conn)
-
-    case Products.create_product(attrs, user) do
-      {:ok, %Product{}} ->
-        conn
-        |> put_flash(:info, gettext("Added beer to inventory"))
-        |> redirect(to: Routes.product_path(conn, :index))
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render_new(conn, changeset)
-
-      error ->
-        error
-    end
-  end
-
   def edit(conn, %{"id" => id}) do
     user = Session.current_user(conn)
 
     with %Product{} = product <- Products.get_product(id),
          %Changeset{} = changeset <- Product.update_changeset(product, %{}, user) do
       render_edit(conn, changeset, product)
-    end
-  end
-
-  def update(conn, %{"id" => id, "product" => product_params}) do
-    user = Session.current_user(conn)
-
-    with %Product{} = product <- Products.get_product(id) do
-      case Products.update_product(product, product_params, user) do
-        {:ok, %Product{}} ->
-          conn
-          |> put_flash(:info, gettext("Updated beer details"))
-          |> redirect(to: Routes.product_path(conn, :index))
-
-        {:error, %Ecto.Changeset{} = changeset} ->
-          render_edit(conn, changeset, product)
-
-        error ->
-          error
-      end
     end
   end
 
