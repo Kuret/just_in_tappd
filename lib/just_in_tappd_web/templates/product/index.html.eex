@@ -9,20 +9,17 @@
 <%= if assigns[:products] && Enum.any?(@products) do %>
     <%= for product <- @products do %>
       <div class="grid-x grid-margin-x grid-margin-y">
+        <div class="cell small-1">
+          <img src="<%= untappd_image_url(product.untappd_id) %>"
+               alt="untappd id <%= product.untappd_id %>"
+               width="75"></img>
+        </div>
         <div class="cell small-6">
           <div class="cell"><%= product.name %></div>
           <div class="cell"><%= product.producer %></div>
         </div>
         <div class="cell small-2">
-          <%= button("Update",
-                     to: Routes.product_path(@conn, :new, %{
-                       untappd_id: product.untappd_id,
-                       name: product.name,
-                       producer: product.producer,
-                       abv: to_string(product.abv)}),
-                     class: "button") %>
-        </div>
-        <div class="cell small-2">
+          <%= button("Update", to: Routes.product_path(@conn, :edit, product), method: "get", class: "button") %>
         </div>
       </div>
     <% end %>

@@ -18,7 +18,8 @@ config :just_in_tappd, JustInTappdWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "bUqz8DzRc2P3X18HfbqbMwMOsLyqNYDBu2ovKL2sr05R/YtKgvxyXtyheqEqmKav",
   render_errors: [view: JustInTappdWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: JustInTappd.PubSub, adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: JustInTappd.PubSub, adapter: Phoenix.PubSub.PG2],
+  live_view: [signing_salt: "yZFoVL5K5d6yQ4pXD5TAciqDU6qkZhxnd93NzHmcM3h/RJeVNJrQfatoil0e7H7x"]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -42,6 +43,10 @@ config :just_in_tappd, JustInTappd.Guardian,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+
+# Render LiveView templates
+config :phoenix,
+  template_engines: [leex: Phoenix.LiveView.Engine]
 
 config :ex_tappd,
   api_user: System.get_env("UT_USER"),

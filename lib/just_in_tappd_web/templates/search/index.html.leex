@@ -1,0 +1,40 @@
+<form phx-change="suggest">
+<div class="grid-x">
+  <div class="cell">
+    <h1>
+      <%= gettext "Search Results" %>
+    </h1>
+  </div>
+  <div class="cell small-8">
+    <input type="text" name="query" value="<%= @query %>" placeholder="Search" autofocus="true" />
+  </div>
+</div>
+
+<%= if assigns[:items] && Enum.any?(@items) do %>
+    <%= for item <- @items do %>
+      <div class="grid-x grid-margin-x grid-margin-y">
+        <div class="cell small-1">
+          <img src="<%= item.label_image %>"
+               alt="untappd id <%= item.untappd_id %>"
+               width="75"></img>
+        </div>
+        <div class="cell small-4">
+          <div class="cell"><%= item.name %></div>
+          <div class="cell"><%= item.brewery %></div>
+        </div>
+        <div class="cell small-2">
+          <%= button("Add to menu", to: Routes.search_path(@socket, :create, item.untappd_id), method: "post", class: "button") %>
+        </div>
+        <div class="cell small-2">
+          <%= form_tag(Routes.product_path(@socket, :new, %{
+												 untappd_id: item.untappd_id,
+												 name: item.name,
+												 producer: item.brewery,
+												 abv: item.abv}), csrf_token: @csrf_token) %>
+            <%= submit("Add to inventory", class: "button") %>
+          </form>
+        </div>
+      </div>
+    <% end %>
+<% end %>
+</form>

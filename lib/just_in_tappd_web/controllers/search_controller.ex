@@ -2,17 +2,12 @@ defmodule JustInTappdWeb.SearchController do
   use JustInTappdWeb, :controller
 
   alias ExTappd.Item
+  alias JustInTappdWeb.SearchLive
 
-  def index(conn, %{"query" => query}) do
-    with {:ok, items} <- Item.search_item(query) do
-      render(conn, "index.html", items: items)
-    else
-      _ -> render(conn, "index.html")
-    end
-  end
-
-  def index(conn, _params) do
-    render(conn, "index.html")
+  def index(conn, params) do
+    live_render(conn, SearchLive,
+      session: %{csrf_token: Phoenix.Controller.get_csrf_token(), query: params["query"]}
+    )
   end
 
   def create(conn, %{"id" => id}) do

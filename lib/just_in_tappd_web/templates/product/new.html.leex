@@ -1,0 +1,73 @@
+<div class="grid-x grid-margin-x">
+  <div class="cell">
+    <h1>
+      <%= @title %>
+    </h1>
+  </div>
+  <div class="cell small-6">
+    <%= f = form_for @changeset, @submit_path, phx_change: "suggest" %>
+      <div class="grid-x grid-margin-x">
+        <div class="cell small-8">
+          <span>
+            Name:
+            <%= text_input f, :name, id: "name_field", name: "name_field", value: @fill[:name], placeholder: "Name" %>
+          </span>
+
+          <span>
+            Brewery:
+            <%= text_input f, :producer, id: "producer_field", value: @fill[:brewery], placeholder: "Brewery" %>
+          </span>
+
+          <span>
+            ABV:
+            <%= number_input f, :abv, id: "abv_field", value: @fill[:abv], placeholder: "ABV", step: "0.05" %>
+          </span>
+
+          <span>
+            Stock:
+            <%= number_input f, :stock, id: "stock_field", placeholder: "Stock", step: "1",
+                value: (f.data.stock == 0 && "" || f.data.stock) %>
+          </span>
+
+          <span>
+            Price:
+            <%= number_input f, :price, id: "price_field", placeholder: "Price", step: "0.01" %>
+          </span>
+        </div>
+        <div class="cell small-4">
+          <span>
+            Untappd ID:
+            <%= text_input f, :untappd_id, id: "ut_id_field", value: @fill[:untappd_id], placeholder: "Untappd ID" %>
+          </span>
+
+          <span>
+            Barcode:
+            <%= text_input f, :barcode, id: "barcode_field", placeholder: "Barcode" %>
+          </span>
+        </div>
+      </div>
+      <div class="grid-x grid-margin-x">
+        <%= submit @title, class: "button" %>
+      </div>
+    </form>
+  </div>
+  <div class="cell small-6">
+		<%= if assigns[:items] && Enum.any?(@items) do %>
+				<%= for {item, i} <- Enum.with_index(@items) do %>
+          <a phx-click="fill<%= i %>">
+						<div class="grid-x grid-margin-x grid-margin-y">
+							<div class="cell small-2">
+								<img src="<%= item.label_image %>"
+										 alt="untappd id <%= item.untappd_id %>"
+										 width="75"></img>
+							</div>
+							<div class="cell small-10">
+								<div class="cell"><%= item.name %></div>
+								<div class="cell"><%= item.brewery %></div>
+							</div>
+						</div>
+          </a>
+				<% end %>
+		<% end %>
+  </div>
+</div>
