@@ -5,12 +5,12 @@
     </h1>
   </div>
   <div class="cell small-6">
-    <%= f = form_for @changeset, @submit_path, phx_change: "suggest" %>
+    <%= f = form_for @changeset, "#", phx_change: :suggest, phx_submit: @submit %>
       <div class="grid-x grid-margin-x">
         <div class="cell small-8">
           <span>
             Name:
-            <%= text_input f, :name, id: "name_field", name: "name_field", value: @fill[:name], placeholder: "Name" %>
+            <%= text_input f, :name, id: "name_field", value: @fill[:name], placeholder: "Name" %>
           </span>
 
           <span>
@@ -25,8 +25,14 @@
 
           <span>
             Stock:
+            <a phx-click="stock3">3</a> -
+            <a phx-click="stock6">6</a> -
+            <a phx-click="stock12">12</a> -
+            <a phx-click="stock24">24</a> -
+            <a phx-click="stock36">36</a> -
+            <a phx-click="stock48">48</a>
             <%= number_input f, :stock, id: "stock_field", placeholder: "Stock", step: "1",
-                value: (f.data.stock == 0 && "" || f.data.stock) %>
+                value: (assigns[:stock] || (f.data.stock == 0 && "" || f.data.stock)) %>
           </span>
 
           <span>
@@ -42,7 +48,7 @@
 
           <span>
             Barcode:
-            <%= text_input f, :barcode, id: "barcode_field", placeholder: "Barcode" %>
+            <%= text_input f, :barcode, id: "barcode_field", value: assigns[:barcode] || f.data.barcode, placeholder: "Barcode" %>
           </span>
         </div>
       </div>
@@ -50,6 +56,25 @@
         <%= submit @title, class: "button" %>
       </div>
     </form>
+    <div class="grid-x grid-margin-x">
+      <%= if assigns[:added] && Enum.any?(@added) do %>
+        <div class="cell" style="margin-top: 20px;">
+          <h3><%= gettext("Added Products") %></h3>
+        </div>
+        <%= for product <- @added do %>
+          <div class="cell" style="margin-top: 10;">
+            <div class="grid-x grid-margin-x">
+              <div class="cell small-6"><%= product.name %></div>
+              <div class="cell small-6">€<%= product.price %></div>
+            </div>
+            <div class="grid-x grid-margin-x">
+              <div class="cell small-6"><%= product.producer %></div>
+              <div class="cell small-6"><%= product.barcode %></div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
   </div>
   <div class="cell small-6">
 		<%= if assigns[:items] && Enum.any?(@items) do %>

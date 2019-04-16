@@ -34,6 +34,7 @@ defmodule JustInTappd.MixProject do
   defp deps do
     [
       {:bamboo, "~> 1.2"},
+      {:basic_auth, "~> 2.2.2"},
       {:guardian, "~> 1.0"},
       {:phoenix, "~> 1.4.3"},
       {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"},

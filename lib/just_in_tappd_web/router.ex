@@ -34,6 +34,7 @@ defmodule JustInTappdWeb.Router do
   end
 
   pipeline :api do
+    plug BasicAuth, use_config: {:just_in_tappd, :basic_auth}
     plug :accepts, ["json"]
   end
 
@@ -58,8 +59,9 @@ defmodule JustInTappdWeb.Router do
     get "/:magic_token", AuthController, :callback
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", JustInTappdWeb do
-  #   pipe_through :api
-  # end
+  scope "/scan", JustInTappdWeb do
+    pipe_through :api
+
+    get "/:barcode", BarcodeController, :create
+  end
 end

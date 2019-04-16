@@ -30,15 +30,7 @@ defmodule JustInTappdWeb.ProductController do
     user = Session.current_user(conn)
 
     with %Changeset{} = changeset <- Product.create_changeset(attrs, user) do
-      live_render(conn, ProductLive,
-        session: %{
-          fill: %{},
-          items: [],
-          changeset: changeset,
-          title: gettext("Add Product"),
-          submit_path: Routes.product_path(conn, :create)
-        }
-      )
+      render_new(conn, changeset)
     end
   end
 
@@ -52,12 +44,7 @@ defmodule JustInTappdWeb.ProductController do
         |> redirect(to: Routes.product_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        conn
-        |> render("new.html",
-          changeset: changeset,
-          title: gettext("Add Product"),
-          submit_path: Routes.product_path(conn, :create)
-        )
+        render_new(conn, changeset)
 
       error ->
         error
@@ -69,11 +56,7 @@ defmodule JustInTappdWeb.ProductController do
 
     with %Product{} = product <- Products.get_product(id),
          %Changeset{} = changeset <- Product.update_changeset(product, %{}, user) do
-      render(conn, "new.html",
-        changeset: changeset,
-        title: gettext("Update Product"),
-        submit_path: Routes.product_path(conn, :update, product)
-      )
+      render_edit(conn, changeset, product)
     end
   end
 
@@ -88,16 +71,44 @@ defmodule JustInTappdWeb.ProductController do
           |> redirect(to: Routes.product_path(conn, :index))
 
         {:error, %Ecto.Changeset{} = changeset} ->
-          conn
-          |> render("new.html",
-            changeset: changeset,
-            title: gettext("Update Product"),
-            submit_path: Routes.product_path(conn, :update, product)
-          )
+          render_edit(conn, changeset, product)
 
         error ->
           error
       end
     end
+  end
+
+  defp render_new(conn, changeset) do
+    render_form(conn, changeset, gettext("Add Product"), :create)
+  end
+
+  defp render_edit(conn, changeset, product) do
+    render_form(
+      conn,
+      changeset,
+      gettext("Update Product"),
+      :update,
+      %{
+        name: product.name,
+        brewery: product.producer,
+        abv: product.abv,
+        untappd_id: product.untappd_id
+      }
+    )
+  end
+
+  defp render_form(conn, changeset, title, submit, fill \\ %{}) do
+    live_render(conn, ProductLive,
+      session: %{
+        added: [],
+        user: Session.current_user(conn),
+        fill: fill,
+        items: [],
+        changeset: changeset,
+        title: title,
+        submit: submit
+      }
+    )
   end
 end
