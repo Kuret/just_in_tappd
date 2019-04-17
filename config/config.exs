@@ -26,6 +26,13 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+# Basic Auth
+config :just_in_tappd,
+  basic_auth: [
+    username: "scanner",
+    password: System.get_env("SCANNER_KEY") || "1337"
+  ]
+
 # Guardian
 config :just_in_tappd, JustInTappd.Guardian,
   allowed_algos: ["HS512"],
